@@ -1,0 +1,93 @@
+<div class="card mt-3 mx-5">
+    <h5 class="card-header">user</h5>
+    <div class="card-body">
+        <table class="table text-center">
+            <thead>
+              <tr>
+                <th scope="col">user_id</th>
+                <th scope="col">email</th>
+                <th scope="col">password</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% for( let i = 0; i < user.length; i++ ) { %>
+                    <tr>
+                      <td><%= user[i].user_id %></td>
+                      <td><%= user[i].email%></td>
+                      <td><%= user[i].password %></td>
+                      <td> 
+                          <div>
+                            <form action="/api/user/<%= user[i].user_id%>" method="POST">
+                                <button type="button" class="btn btn-info" data-toggle="modal"data-target="#userUpdate" >Update</button>
+                                <button class="btn btn-danger" type="hidden" name="_method" value="DELETE">Delete</button>
+                            </form>
+                          </div>
+                      </td>
+                    </tr>
+                <% } %>
+            </tbody>
+          </table>
+           <!-- Add Button -->
+           <button type="button" class="btn btn-primary" data-toggle="modal"data-target="#biodataModals" >Manual Add</button>
+           <!--Biodata modals -->
+           <div class="modal fade" id="biodataModals" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+             <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                   </button>
+                 </div>
+                 <!-- Modals Body -->
+                 <form class="modal-body" method="POST" action="/api/user">
+                     <div class="form-group">
+                         <label for="recipient-name" class="col-form-label">email :</label>
+                         <input type="email" class="form-control" id="recipient-name" name="email">
+                     </div>
+                     <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">password:</label>
+                        <input type="password" class="form-control" id="recipient-name" name="password">
+                    </div>
+                   <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                     <button type="submit" class="btn btn-primary">Add</button>
+                   </div>
+                 </form>
+                 </div>
+               </div>
+          </div>
+    </div>
+</div>
+
+
+<!-- Update Modals -->
+<div class="modal fade" id="userUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- Modals Body -->
+        <% for( let i = 0; i < user.length; i++ ) { %>
+        <form class="modal-body" method="POST" action="/api/user/<%= user[i].user_id %>">
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">email:</label>
+                <input type="email" class="form-control" id="recipient-name" name="email">
+            </div>
+            <div class="form-group">
+               <label for="recipient-name" class="col-form-label">password:</label>
+               <input type="password" class="form-control" id="recipient-name" name="password">
+           </div>
+           <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+        </form>
+        <% } %>
+        </div>
+      </div>
+ </div>
