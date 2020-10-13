@@ -6,8 +6,8 @@ module.exports = (user) => {
     router.post("/", userController.create)
     router.get("/", userController.findAll);
     router.get("/:id", userController.findOne);
-    // router.post("/:id", userController.update);
-    router.post("/:id", userController.delete);
+    router.put("/:id", userController.update);
+    router.delete("/:id", userController.delete);
     router.delete("/", userController.deleteAll);
     
     //path

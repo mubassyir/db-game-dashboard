@@ -4,5 +4,20 @@ module.exports =(dashboard)=> {
   const dashboardController = require("../controllers/dashboard.controller");
     router.get("/",dashboardController.get);
 
+    //Form
+    router.get("/form_user/:id",dashboardController.getForm);
+    router.get("/form_biodata/:id",dashboardController.getFormBio);
+    router.get("/form_history/:id",dashboardController.getFormHistory);
+    
+    //Update
+    router.post("/user_update/:id",dashboardController.updateUser);
+    router.post("/biodata_update/:id",dashboardController.updateBio);
+    router.post("/history_update/:id",dashboardController.updateHistory);
+
+    //Delete
+    router.post("/user_delete/:id",dashboardController.deleteUser);
+    router.post("/bio_delete/:id",dashboardController.deleteBio);
+    router.post("/history_delete/:id",dashboardController.deleteHistory);
+
     dashboard.use('/',router);
   };

@@ -7,7 +7,7 @@ module.exports = (bio) => {
     router.get("/",bioController.findAll)
     router.get("/:id", bioController.findOne);
     router.put("/:id", bioController.update);
-    router.post("/:id", bioController.delete);
+    router.delete("/:id", bioController.delete);
     router.delete("/", bioController.deleteAll);
     
     //path

@@ -9,18 +9,16 @@ exports.create = (req, res) => {
     res.status(400).send({
       message: "content can not be empty",
     });
-
     return;
   }
 
-  // Create tutorial
+  // Create history
   const history = {
     user_id : req.body.user_id,
     result : req.body.result
   };
-
   History.create(history).then(() => {
-      res.redirect("/");
+      res.send({message: "creating history success"});
     }).catch((err) => {
       res.status(500).send({
         message: err.message || "some error while creating history data",
@@ -30,11 +28,8 @@ exports.create = (req, res) => {
 
 //retrive all data
 exports.findAll = (req, res) => {
- 
   History.findAll({
-    
-  })
-    .then((data) => {
+  }).then((data) => {
       res.send(data);
     })
     .catch((err) => {
@@ -58,14 +53,12 @@ exports.findOne = (req, res) => {
       });
   };
   
-  //update data
+//update data
 exports.update = (req, res) => {
-    const id = req.params.id;
-  
+    const id = req.params.id;  
     History.update(req.body, {
       where: { id: id },
-    })
-      .then((num) => {
+    }).then((num) => {
         if (num == 1) {
           res.send({
             message: "history data updated successfully",
@@ -78,19 +71,18 @@ exports.update = (req, res) => {
       })
       .catch((err) => {
         res.status(500).send({
-          message: err.message || `Errot updating history with ${id}`,
+          message: err.message || `Errot updating history with ${id}`
         });
       });
   };
 
-  // delete with query params
+// delete with query params
 exports.delete = (req, res) => {
     const id = req.params.id;
-  
     History.destroy({ where: { history_id: id } })
       .then((num) => {
         if (num == 1) {
-          res.redirect("/");
+          res.send({message:"delete history success"});
         } else {
           res.send({
             message: `Cannot delete history with id=${id}`,
@@ -104,13 +96,12 @@ exports.delete = (req, res) => {
       });
   };
 
-  //Delete all
+//Delete all
 exports.deleteAll = (req, res) => {
     History.destroy({
       where: {},
       truncate: false,
-    })
-      .then((nums) => {
+    }).then((nums) => {
         res.send({
           message: 'Table history was deleted successfully',
         });

@@ -7,7 +7,7 @@ module.exports = (history) => {
     router.get("/",historyController.findAll);
     router.get("/:id", historyController.findOne);
     router.put("/:id", historyController.update);
-    router.post("/:id", historyController.delete);
+    router.delete("/:id", historyController.delete);
     router.delete("/", historyController.deleteAll);
     
     //path

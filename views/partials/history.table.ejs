@@ -19,9 +19,11 @@
                           <td><%= history[i].result%></td>
                           <td> 
                             <div>
-                              <form action="/api/history/<%= history[i].history_id %>" method="POST">
-                                  <button type="button" class="btn btn-info" data-toggle="modal"data-target="#historyUpdate" >Update</button>
-                                  <button class="btn btn-danger" type="hidden" name="_method" value="DELETE">Delete</button>
+                              <form action="/form_history/<%= history[i].history_id %>" method="GET">
+                                <button type="submit" class="btn btn-info" >Update</button>
+                              </form>
+                              <form action="/history_delete/<%= history[i].history_id %>" method="POST">
+                                <button class="btn btn-danger" type="hidden" name="_method" value="DELETE">Delete</button>
                               </form>
                             </div>
                           </td>
@@ -60,34 +62,3 @@
              </div>
         </div>
    </div>
-
-
-
-<!-- Update Modals -->
-<div class="modal fade" id="historyUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update History</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <!-- Modals Body -->
-      <form class="modal-body" method="POST" action="/api/history">
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">user_id:</label>
-            <input type="number" class="form-control" id="recipient-name" name="user_id">
-          </div>
-          <div class="form-group">
-              <label for="recipient-name" class="col-form-label">result:</label>
-              <input type="text" class="form-control" id="recipient-name" name="result">
-          </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Update</button>
-        </div>
-      </form>
-      </div>
-    </div>
-</div>

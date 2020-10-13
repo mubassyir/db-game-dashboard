@@ -9,20 +9,18 @@ exports.create = (req, res) => {
     res.status(400).send({
       message: "content can not be empty",
     });
-
     return;
   }
 
-  // Create tutorial
+  // Create User
   const bio = {
     user_id : req.body.user_id,
     first_name : req.body.first_name,
     last_name : req.body.last_name
   };
 
-  Bio.create(bio) //command from ORM 
-    .then(() => {
-      res.redirect("/");
+  Bio.create(bio) .then(() => {
+      res.send({message: "creating User success"});
     })
     .catch((err) => {
       res.status(500).send({
@@ -66,14 +64,13 @@ exports.findOne = (req, res) => {
 //update data
 exports.update = (req, res) => {
   const id = req.params.id;
-
   Bio.update(req.body, {
     where: { id: id },
   })
     .then((num) => {
       if (num == 1) {
         res.send({
-          message: "Bio data updated successfully",
+          message: "Bio data updated success",
         });
       } else {
         res.send({
@@ -95,7 +92,7 @@ exports.delete = (req, res) => {
   Bio.destroy({ where: { bio_id: id } })
     .then((num) => {
       if (num == 1) {
-        res.redirect("/");
+        res.send({message: "Deleting user succes"});
       } else {
         res.send({
           message: `Cannot delete user with id=${id}`,
