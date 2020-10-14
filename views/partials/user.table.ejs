@@ -17,21 +17,40 @@
                       <td><%= user[i].email%></td>
                       <td><%= user[i].password %></td>
                       <td> 
-                          <div>
-                            <form action="/form_user/<%= user[i].user_id %>" method="GET">
-                              <button type="submit" class="btn btn-info" >Update</button>
-                            </form>
-                            <form action="/user_delete/<%= user[i].user_id%>" method="POST">
-                              <button class="btn btn-danger" type="hidden" name="_method" value="DELETE">Delete</button>
-                          </form>
+                        <button class="btn btn-info" onclick="window.location.href='/form_user/<%= user[i].user_id %>'">Update</button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">
+                          Delete
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmation Delete</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                Are you sure to delete?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <form action="/user_delete/<%= user[i].user_id %>" method="POST">
+                                  <button class="btn btn-danger" type="hidden" name="_method" value="DELETE">Yes</button>
+                                </form>
+                              </div>
+                            </div>
                           </div>
+                        </div>
                       </td>
                     </tr>
                 <% } %>
             </tbody>
           </table>
            <!-- Add Button -->
-           <button type="button" class="btn btn-primary" data-toggle="modal"data-target="#biodataModals" >Manual Add</button>
+           <button type="button" class="btn btn-primary" data-toggle="modal"data-target="#biodataModals">Manual Add</button>
            <!--Biodata modals -->
            <div class="modal fade" id="biodataModals" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog" role="document">
@@ -43,7 +62,7 @@
                    </button>
                  </div>
                  <!-- Modals Body -->
-                 <form class="modal-body" method="POST" action="/api/user">
+                 <form class="modal-body" method="POST" action="/create_user">
                      <div class="form-group">
                          <label for="recipient-name" class="col-form-label">email :</label>
                          <input type="email" class="form-control" id="recipient-name" name="email">

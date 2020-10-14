@@ -1,5 +1,78 @@
 const db = require("../models");
 
+// create
+exports.createUser = (req, res) => {
+  // validate request
+  if (!req.body.email || !req.body.password) {
+    res.status(400).send({
+      message: "content can not be empty",
+    });
+    return;
+  }
+
+  // Create User
+  const user = {
+    email : req.body.email,
+    password : req.body.password
+  };
+  db.user.create(user) .then(() => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "some error while creating User data",
+      });
+    });
+};
+
+exports.createBio = (req, res) => {
+  // validate request
+  if (!req.body.user_id) {
+    res.status(400).send({
+      message: "content can not be empty",
+    });
+    return;
+  }
+  // Create User
+  const bio = {
+    user_id : req.body.user_id,
+    first_name : req.body.first_name,
+    last_name : req.body.last_name
+  };
+
+  db.bio.create(bio) .then(() => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "some error while creating User data",
+      });
+    });
+};
+
+exports.createHistory = (req, res) => {
+  // validate request
+  if (!req.body.user_id) {
+    res.status(400).send({
+      message: "content can not be empty",
+    });
+    return;
+  }
+
+  // Create history
+  const history = {
+    user_id : req.body.user_id,
+    result : req.body.result
+  };
+  db.history.create(history).then(() => {
+      res.redirect("/");
+    }).catch((err) => {
+      res.status(500).send({
+        message: err.message || "some error while creating history data",
+      });
+    });
+};
+
 //retrive all data
 exports.get = async (req, res) => {
   let user = await db.user.findAll();
@@ -15,7 +88,7 @@ exports.getForm = (req, res) => {
 
 exports.getFormBio = (req, res) => {
   let bio_id =req.params.id;
-  res.render("page/history.form.ejs",{bio_id:bio_id})      
+  res.render("page/biodata.form.ejs",{bio_id:bio_id})      
 };
 
 exports.getFormHistory = (req, res) => {

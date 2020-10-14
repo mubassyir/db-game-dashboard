@@ -2,7 +2,7 @@ const db = require("../models");
 const Bio = db.bio;
 const Op = db.Sequelize.Op;
 
-// create and  save a new tutorial
+// create
 exports.create = (req, res) => {
   // validate request
   if (!req.body.user_id) {

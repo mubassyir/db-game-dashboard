@@ -17,7 +17,7 @@ exports.create = (req, res) => {
 
   User.create(user) 
     .then(() => {
-      res.redirect("/");
+      res.send({message:"creating data success"});
     })
     .catch((err) => {
       res.status(500).send({

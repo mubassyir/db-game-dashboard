@@ -4,6 +4,11 @@ module.exports =(dashboard)=> {
   const dashboardController = require("../controllers/dashboard.controller");
     router.get("/",dashboardController.get);
 
+    //Create
+    router.post("/create_user",dashboardController.createUser);
+    router.post("/create_bio",dashboardController.createBio);
+    router.post("/create_history",dashboardController.createHistory);
+
     //Form
     router.get("/form_user/:id",dashboardController.getForm);
     router.get("/form_biodata/:id",dashboardController.getFormBio);

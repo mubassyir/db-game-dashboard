@@ -19,15 +19,34 @@
                       <td><%= bio[i].first_name%></td>
                       <td><%= bio[i].last_name%></td>
                       <td> 
-                        <div>
-                          <form action="/form_biodata/<%= bio[i].bio_id %>" method="GET">
-                            <button type="submit" class="btn btn-info" >Update</button>
-                          </form>
-                          <form action="/bio_delete/<%= bio[i].bio_id%>" method="POST">
-                            <button class="btn btn-danger" type="hidden" name="_method" value="DELETE">Delete</button>
-                        </form>
+                        <button class="btn btn-info" onclick="window.location.href='/form_biodata/<%= bio[i].bio_id %>'">Update</button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#bioDelete">
+                          Delete
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="bioDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmation Delete</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                Are you sure to delete?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <form action="/bio_delete/<%= bio[i].bio_id %>" method="POST">
+                                  <button class="btn btn-danger" type="hidden" name="_method" value="DELETE">Yes</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                    </td>
+                      </td>
                     </tr>
                 <% } %>
             </tbody>
@@ -45,7 +64,7 @@
                    </button>
                  </div>
                  <!-- Modals Body -->
-                 <form class="modal-body" method="POST" action="/api/biodata">
+                 <form class="modal-body" method="POST" action="/create_bio">
                      <div class="form-group">
                        <label for="recipient-name" class="col-form-label">user_id:</label>
                        <input type="number" class="form-control" id="recipient-name" name="user_id">
