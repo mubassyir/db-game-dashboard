@@ -65,7 +65,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
   Bio.update(req.body, {
-    where: { id: id },
+    where: { bio_id: id },
   })
     .then((num) => {
       if (num == 1) {

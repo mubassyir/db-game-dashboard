@@ -95,6 +95,7 @@ exports.getFormHistory = (req, res) => {
   let history_id =req.params.id;
   res.render("page/history.form.ejs",{history_id:history_id})      
 };
+
 exports.updateUser = (req, res) => {
   const id = req.params.id;      
   db.user.update(req.body, {
