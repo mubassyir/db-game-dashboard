@@ -80,6 +80,12 @@ exports.get = async (req, res) => {
   let history = await db.history.findAll()
   res.render("page/index.ejs",{user,bio,history});
 };
+exports.login = async (req, res) => {
+  res.render("page/login.ejs");
+};
+exports.register = async (req, res) => {
+  res.render("page/register.ejs");
+};
 
 exports.getForm = (req, res) => {
   let user_id =req.params.id;
@@ -112,7 +118,7 @@ exports.updateUser = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || `Errot updating user with ${id}`,
+        message: err.message || `Error updating user with ${id}`,
       });
     });
 };

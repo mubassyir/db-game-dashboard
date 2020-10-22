@@ -3,6 +3,8 @@ var router = require('express').Router();
 module.exports =(dashboard)=> {
   const dashboardController = require("../controllers/dashboard.controller");
     router.get("/",dashboardController.get);
+    router.get("/login",dashboardController.login);
+    router.get("/register",dashboardController.register);
 
     //Create
     router.post("/create_user",dashboardController.createUser);
