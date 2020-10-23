@@ -1,9 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+require('dotenv').config();
 const db = require("./app/models");
 const app = express();
-PORT = 8001;
+const PORT = process.env.PORT;
 
 let corsOption = {
     origin : 'http://localhost:8081'
